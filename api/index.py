@@ -149,14 +149,15 @@ def get_all_data(data):
         # res = dict()
         table = data[i]
         for j in range(1, len(table)):
-            date = formatDate(table[j][0])
-            for k in range(1, len(table[0])):
-                prov = table[0][k]
-                value = re.search("\d+", str(table[j][k]))
-                value = int(value.group()) if value else 0
-                res.setdefault(date, dict()).setdefault(prov, list()).append(value)
-                if "全国" == prov and "累计" != date:
-                    daily_data.setdefault(names[i], list()).append(value)
+            if table[j][0] != '累计':
+                date = formatDate(table[j][0])
+                for k in range(1, len(table[0])):
+                    prov = table[0][k]
+                    value = re.search("\d+", str(table[j][k]))
+                    value = int(value.group()) if value else 0
+                    res.setdefault(date, dict()).setdefault(prov, list()).append(value)
+                    if "全国" == prov and "累计" != date:
+                        daily_data.setdefault(names[i], list()).append(value)
             # res[date] = dict_to_json(res[date])
         # result[names[i]] = res
     for date in res.keys():
