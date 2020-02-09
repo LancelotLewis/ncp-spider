@@ -134,7 +134,7 @@ def get_all_data(data):
         tempDate = data[0][i][0]
         print(tempDate)
         try:
-            formatDate = time.strftime("%m-%d", time.strptime(tempDate, '%m/%d'))
+            formatDate = time.strftime("%m-%d", time.strptime(tempDate, '%m-%d'))
         except:
             formatDate = time.strftime("%m-%d", time.strptime(tempDate, '%m月%d日'))
         finally:
