@@ -126,19 +126,22 @@ def get_latest_data(data):
     return json.dumps(dict_to_json(res), ensure_ascii=False)
 
 
+def formatDate(tempDate):
+    try:
+        date = time.strftime("%m-%d", time.strptime(tempDate, '%m-%d'))
+    except:
+        date = time.strftime("%m-%d", time.strptime(tempDate, '%m月%d日'))
+    finally:
+        return date
+
+
 def get_all_data(data):
     num_table = len(data)
     result, daily_data = dict(), dict()
     daily_data["日期"] = []
     for i in range(1, len(data[0])-1):
         tempDate = data[0][i][0]
-        print(tempDate)
-        try:
-            formatDate = time.strftime("%m-%d", time.strptime(tempDate, '%m-%d'))
-        except:
-            formatDate = time.strftime("%m-%d", time.strptime(tempDate, '%m月%d日'))
-        finally:
-            daily_data["日期"].append(formatDate)
+        daily_data["日期"].append(formatDate(tempDate))
 
     names = ['确诊', '死亡', '治愈']
     res = dict()
@@ -146,7 +149,7 @@ def get_all_data(data):
         # res = dict()
         table = data[i]
         for j in range(1, len(table)):
-            date = table[j][0]
+            date = formatDate(table[j][0])
             for k in range(1, len(table[0])):
                 prov = table[0][k]
                 value = re.search("\d+", str(table[j][k]))
