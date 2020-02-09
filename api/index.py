@@ -132,6 +132,7 @@ def get_all_data(data):
     daily_data["日期"] = []
     for i in range(1, len(data[0])-1):
         tempDate = data[0][i][0]
+        print(tempDate)
         try:
             formatDate = time.strftime("%m-%d", time.strptime(tempDate, '%m/%d'))
         except:
@@ -182,7 +183,7 @@ def get_china_data():
     # convert table to data
     china_data = [t2d(china_table[i]) for i in range(3)]
     city_data = t2d(city_table)
-    print(city_data)
+    # print(city_data)
     # latest_data = get_latest_data(china_data)
     all_data = get_all_data(china_data)
     return all_data
