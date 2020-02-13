@@ -141,8 +141,9 @@ def get_all_data(data):
     daily_data["日期"] = []
     for i in range(1, len(data[0])-1):
         tempDate = data[0][i][0]
-        if (tempDate != '累计' and tempDate != '日期'):
-            daily_data["日期"].append(formatDate(tempDate))
+        if (tempDate != '累计'):
+            if(tempDate != '日期'):
+                daily_data["日期"].append(formatDate(tempDate))
 
     names = ['确诊', '死亡', '治愈']
     res = dict()
