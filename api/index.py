@@ -151,7 +151,7 @@ def get_all_data(data):
         # res = dict()
         table = data[i]
         for j in range(1, len(table)):
-            if table[j][0] != '累计':
+            if table[j][0] != '累计' and table[j][0] != '日期':
                 date = formatDate(table[j][0])
                 for k in range(1, len(table[0])):
                     prov = table[0][k]
