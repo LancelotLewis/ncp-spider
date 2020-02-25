@@ -130,7 +130,10 @@ def formatDate(tempDate):
     try:
         date = time.strftime("%m-%d", time.strptime(tempDate, '%m-%d'))
     except:
-        date = time.strftime("%m-%d", time.strptime(tempDate, '%m月%d日'))
+        try:
+            date = time.strftime("%m-%d", time.strptime(tempDate, '%m/%d'))
+        except:
+            date = time.strftime("%m-%d", time.strptime(tempDate, '%m月%d日'))
     finally:
         return date
 
